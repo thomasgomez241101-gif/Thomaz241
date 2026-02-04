@@ -1,53 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Quieres ser mi San Valentín?</title>
-    <style>
-        body {
-            display: flex; justify-content: center; align-items: center;
-            height: 100vh; margin: 0; background-color: #ffe4e1;
-            font-family: sans-serif; text-align: center; overflow: hidden;
-        }
-        #box {
-            background: white; padding: 25px; border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1); max-width: 90%;
-        }
-        img { width: 180px; margin-bottom: 15px; border-radius: 10px; }
-        h1 { color: #d32f2f; font-size: 22px; }
-        .btns {
-            display: flex; justify-content: center; align-items: center;
-            gap: 15px; margin-top: 20px;
-        }
-        button {
-            padding: 10px 20px; font-size: 16px; border: none;
-            border-radius: 8px; cursor: pointer; transition: 0.2s;
-        }
-        #si { background: #ff4d6d; color: white; }
-        #no { background: #808080; color: white; z-index: 999; }
-        .win h1 { color: #ff0054; font-size: 28px; }
-    </style>
-</head>
-<body>
-    <div id="box">
-        <div id="c">
-            <img id="m" src="https://media.tenor.com/jbm_9uYv768AAAAi/mochi-mochi-peach-cat-peach-cat.gif">
-            <h1 id="t">¿Quieres ser mi San Valentín? ❤️</h1>
-            <div class="btns">
-                <button id="si" onclick="ok()">Sí</button>
-                <button id="no" onmouseover="move()" onclick="move()">No</button>
-            </div>
-        </div>
+<div class="container">
+    <img id="bear" src="https://media.tenor.com/jbm_9uYv768AAAAi/mochi-mochi-peach-cat-peach-cat.gif" alt="osito">
+    <h1>¿Quieres ser mi San Valentín? 🌹</h1>
+    <div class="buttons">
+        <button id="yesButton" onclick="handleYes()">Sí</button>
+        <button id="noButton" onclick="handleNo()">No</button>
     </div>
-    <script>
-        const bNo = document.getElementById('no');
-        const bSi = document.getElementById('si');
-        const msgs = ["¿Segura? 🥺", "¡Piénsalo! 🙄", "¡No seas mala! 💔", "¡Di que sí! ✨", "¡Ándale! 🌹"];
-        let i = 0;
-        let sz = 16;
-
-        function move() {
-            // Cambia el texto
-            bNo.textContent = msgs[i];
-            i = (
+</div>
