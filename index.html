@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe4e1;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        #container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 400px;
+        }
+
+        img {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #d32f2f;
+            font-size: 24px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yesButton {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #noButton {
+            background-color: #808080;
+            color: white;
+        }
+
+        /* Estilos para la página final */
+        .celebration h1 {
+            font-size: 32px;
+            color: #ff0054;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="main-content">
+            <img id="bear-img" src="https://media.tenor.com/jbm_9uYv768AAAAi/mochi-mochi-peach-cat-peach-cat.gif" alt="Osito">
+            <h1 id="question">¿Quieres ser mi San Valentín? ❤️</h1>
+            <div class="buttons">
+                <button id="yesButton" onclick="showCelebration()">Sí</button>
+                <button id="noButton" onmouseover="moveNoButton()" onclick="changeNoText()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('noButton');
+        const yesButton = document.getElementById('yesButton');
+        const mainContent = document.getElementById('main-content');
+
+        const messages = [
+            "¿Segura?", 
+            "¡Piénsalo bien!", 
+            "¿De verdad no?", 
+            "¡Me vas a romper el corazón!", 
+            "Di que sí, por fi..."
+        ];
+        let messageIndex = 0;
+
+        // Función para el botón NO
+        function changeNoText() {
+            noButton.textContent = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+            
+            // Hacer que el botón SÍ crezca cada vez que se intenta decir NO
+            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = (currentSize * 1.4) + 'px';
+            yesButton.style.padding = (currentSize * 0.8) + 'px ' + (currentSize * 1.5) + 'px';
+        }
+
+        // Opcional: Mover el botón NO para que sea difícil darle clic
+        function moveNoButton() {
+            if(messageIndex > 1) { // Empieza a moverse después de un par de intentos
+                const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+                const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+                noButton.style.position = 'absolute';
+                noButton.style.left = x + 'px';
+                noButton.style.top = y + 'px';
+            }
+        }
+
+        // Función cuando dice SÍ
+        function showCelebration() {
+            mainContent.innerHTML = `
+                <div class="celebration">
+                    <img src="https://media.tenor.com/gU_Pb_v8v84AAAAi/goma-happy.gif" alt="Celebración">
+                    <h1>
