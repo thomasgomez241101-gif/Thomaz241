@@ -12,10 +12,13 @@
         }
         #box {
             background: white; padding: 25px; border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1); max-width: 90%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 85%; max-width: 400px;
         }
-        img { width: 180px; margin-bottom: 15px; border-radius: 10px; }
-        h1 { color: #d32f2f; font-size: 22px; }
+        img { 
+            width: 100%; max-width: 200px; height: auto; 
+            margin: 0 auto 15px; display: block; border-radius: 10px; 
+        }
+        h1 { color: #d32f2f; font-size: 22px; margin: 10px 0; }
         .btns {
             display: flex; justify-content: center; align-items: center;
             gap: 15px; margin-top: 20px;
@@ -25,14 +28,14 @@
             border-radius: 8px; cursor: pointer; transition: 0.2s;
         }
         #si { background: #ff4d6d; color: white; }
-        #no { background: #808080; color: white; z-index: 999; }
-        .win h1 { color: #ff0054; font-size: 28px; }
+        #no { background: #808080; color: white; position: relative; }
+        .win h1 { color: #ff0054; font-size: 26px; }
     </style>
 </head>
 <body>
     <div id="box">
         <div id="c">
-            <img id="m" src="https://media.tenor.com/jbm_9uYv768AAAAi/mochi-mochi-peach-cat-peach-cat.gif">
+            <img id="m" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmZ0Z3RreXByZ3p6NXF3Z3RreXByZ3p6NXF3Z3RreXByZ3p6NXF3JmVwPXYxX3N0aWNrZXJzX2xvZ29fZ2lmX29ubHkmY3Q9cw/KztT2c4u8mYYUiMKdJ/giphy.gif" alt="Osito">
             <h1 id="t">¿Quieres ser mi San Valentín? ❤️</h1>
             <div class="btns">
                 <button id="si" onclick="ok()">Sí</button>
@@ -48,17 +51,14 @@
         let sz = 16;
 
         function move() {
-            // Cambia el texto
             bNo.textContent = msgs[i];
             i = (i + 1) % msgs.length;
-            // El botón SI crece
             sz += 15;
             bSi.style.fontSize = sz + 'px';
             bSi.style.padding = (sz/2) + 'px ' + sz + 'px';
-            // El botón NO se escapa
             const x = Math.random() * (window.innerWidth - bNo.offsetWidth);
             const y = Math.random() * (window.innerHeight - bNo.offsetHeight);
-            bNo.style.position = 'absolute';
+            bNo.style.position = 'fixed';
             bNo.style.left = x + 'px';
             bNo.style.top = y + 'px';
         }
@@ -66,9 +66,9 @@
         function ok() {
             document.getElementById('c').innerHTML = `
                 <div class="win">
-                    <img src="https://media.tenor.com/gU_Pb_v8v84AAAAi/goma-happy.gif">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueGZ3bmZ3NjZ3eHh3eHh3eHh3eHh3eHh3eHh3eHh3eHh3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/G96zgIcQ6f3Y2vO7df/giphy.gif">
                     <h1>¡SIII! 🎉 Sabía que dirías que sí ❤️</h1>
-                    <p>¡Eres la mejor! 😍</p>
+                    <p>¡Nos vemos el 14! 😍</p>
                 </div>`;
             document.body.style.background = "#ffc0cb";
         }
