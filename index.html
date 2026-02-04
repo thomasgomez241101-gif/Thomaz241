@@ -6,121 +6,48 @@
     <title>¿Quieres ser mi San Valentín?</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #ffe4e1;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0; background-color: #ffe4e1;
+            font-family: sans-serif; text-align: center; overflow: hidden;
         }
-
-        #container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            max-width: 400px;
+        #box {
+            background: white; padding: 25px; border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); max-width: 90%;
         }
-
-        img {
-            width: 200px;
-            margin-bottom: 20px;
+        img { width: 180px; margin-bottom: 15px; border-radius: 10px; }
+        h1 { color: #d32f2f; font-size: 22px; }
+        .btns {
+            display: flex; justify-content: center; align-items: center;
+            gap: 15px; margin-top: 20px;
         }
-
-        h1 {
-            color: #d32f2f;
-            font-size: 24px;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
         button {
-            padding: 10px 20px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
+            padding: 10px 20px; font-size: 16px; border: none;
+            border-radius: 8px; cursor: pointer; transition: 0.2s;
         }
-
-        #yesButton {
-            background-color: #ff4d6d;
-            color: white;
-        }
-
-        #noButton {
-            background-color: #808080;
-            color: white;
-        }
-
-        /* Estilos para la página final */
-        .celebration h1 {
-            font-size: 32px;
-            color: #ff0054;
-        }
+        #si { background: #ff4d6d; color: white; }
+        #no { background: #808080; color: white; z-index: 999; }
+        .win h1 { color: #ff0054; font-size: 28px; }
     </style>
 </head>
 <body>
-
-    <div id="container">
-        <div id="main-content">
-            <img id="bear-img" src="https://media.tenor.com/jbm_9uYv768AAAAi/mochi-mochi-peach-cat-peach-cat.gif" alt="Osito">
-            <h1 id="question">¿Quieres ser mi San Valentín? ❤️</h1>
-            <div class="buttons">
-                <button id="yesButton" onclick="showCelebration()">Sí</button>
-                <button id="noButton" onmouseover="moveNoButton()" onclick="changeNoText()">No</button>
+    <div id="box">
+        <div id="c">
+            <img id="m" src="https://media.tenor.com/jbm_9uYv768AAAAi/mochi-mochi-peach-cat-peach-cat.gif">
+            <h1 id="t">¿Quieres ser mi San Valentín? ❤️</h1>
+            <div class="btns">
+                <button id="si" onclick="ok()">Sí</button>
+                <button id="no" onmouseover="move()" onclick="move()">No</button>
             </div>
         </div>
     </div>
-
     <script>
-        const noButton = document.getElementById('noButton');
-        const yesButton = document.getElementById('yesButton');
-        const mainContent = document.getElementById('main-content');
+        const bNo = document.getElementById('no');
+        const bSi = document.getElementById('si');
+        const msgs = ["¿Segura? 🥺", "¡Piénsalo! 🙄", "¡No seas mala! 💔", "¡Di que sí! ✨", "¡Ándale! 🌹"];
+        let i = 0;
+        let sz = 16;
 
-        const messages = [
-            "¿Segura?", 
-            "¡Piénsalo bien!", 
-            "¿De verdad no?", 
-            "¡Me vas a romper el corazón!", 
-            "Di que sí, por fi..."
-        ];
-        let messageIndex = 0;
-
-        // Función para el botón NO
-        function changeNoText() {
-            noButton.textContent = messages[messageIndex];
-            messageIndex = (messageIndex + 1) % messages.length;
-            
-            // Hacer que el botón SÍ crezca cada vez que se intenta decir NO
-            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
-            yesButton.style.fontSize = (currentSize * 1.4) + 'px';
-            yesButton.style.padding = (currentSize * 0.8) + 'px ' + (currentSize * 1.5) + 'px';
-        }
-
-        // Opcional: Mover el botón NO para que sea difícil darle clic
-        function moveNoButton() {
-            if(messageIndex > 1) { // Empieza a moverse después de un par de intentos
-                const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
-                const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
-                noButton.style.position = 'absolute';
-                noButton.style.left = x + 'px';
-                noButton.style.top = y + 'px';
-            }
-        }
-
-        // Función cuando dice SÍ
-        function showCelebration() {
-            mainContent.innerHTML = `
-                <div class="celebration">
-                    <img src="https://media.tenor.com/gU_Pb_v8v84AAAAi/goma-happy.gif" alt="Celebración">
-                    <h1>
+        function move() {
+            // Cambia el texto
+            bNo.textContent = msgs[i];
+            i = (
